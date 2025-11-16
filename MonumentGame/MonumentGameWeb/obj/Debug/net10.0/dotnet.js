@@ -5,7 +5,7 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
   "mainAssemblyName": "MonumentGameWeb",
   "applicationEnvironment": "Development",
   "resources": {
-    "hash": "sha256-QfwLU+PNVaoWHLXkIMc4SiOPHY+EVxnXRC0/vaLnY2Y=",
+    "hash": "sha256-nt6hfD+f0wZfBblNbMRUblOItWG5mSNQBA2oZ6kNJ+4=",
     "jsModuleNative": [
       {
         "name": "dotnet.native.xanz2e7ksm.js"
@@ -1039,15 +1039,15 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
       },
       {
         "virtualPath": "MonumentGameWeb.wasm",
-        "name": "MonumentGameWeb.qp6badq71u.wasm",
-        "integrity": "sha256-QgtJUaTIjxCja2dI4bHLE/+6HDaALuWT2Kfzf57Q+38="
+        "name": "MonumentGameWeb.jhdjunc7p9.wasm",
+        "integrity": "sha256-B+XY7mGG8fhSr7A4ccAk5dB12CzYunc+JE60o30LaGo="
       }
     ],
     "pdb": [
       {
         "virtualPath": "MonumentGameWeb.pdb",
-        "name": "MonumentGameWeb.yeel9aga8z.pdb",
-        "integrity": "sha256-xjLM+SzM/OGSAfyBVPhbGHHu/qFzWwV7LhUmm+R0lSE="
+        "name": "MonumentGameWeb.qejwie334v.pdb",
+        "integrity": "sha256-vpsuQBEw6gT5a2sn4aNxpNlF2hb602qpeobOS4+VgH4="
       }
     ],
     "libraryInitializers": [

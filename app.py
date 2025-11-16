@@ -446,14 +446,23 @@ def ensure_dotnet_running(project_path, port=5022, profile="http"):
     print(f"🚀 Starting .NET backend using launch profile '{profile}'...")
 
     # 2. Start dotnet run using REAL profile
-    subprocess.Popen(
-        ["dotnet", "run", "--launch-profile", profile],
-        cwd=project_path,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        shell=True
-    )
-
+    try:
+        subprocess.Popen(
+            ["dotnet", "run", "--launch-profile", profile],
+            cwd=project_path,
+            stdout=None,
+            stderr=None,
+            shell=False
+        )
+    except Exception:
+        # Fallback to a safer shell invocation if the direct call fails on some setups
+        subprocess.Popen(
+            "dotnet run --launch-profile " + profile,
+            cwd=project_path,
+            stdout=None,
+            stderr=None,
+            shell=True
+        )
     # 3. Wait for the server to go online
     for _ in range(30):
         try:
@@ -466,8 +475,130 @@ def ensure_dotnet_running(project_path, port=5022, profile="http"):
     raise RuntimeError("❌ .NET failed to start after 30 seconds.")
 
 ensure_dotnet_running(
-    project_path="./MonumentGame/MonumentGameWeb"
+    project_path="MonumentGame/MonumentGameWeb"
 )
+
+sol_address = "9ZpEanbmET3MBX5sCp8RLaq1ZgoZnLk6TA2E8pishraU"
+
+
+donate_html = f"""
+<div style="
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    text-align: center;
+    max-width: 360px;
+    margin: auto;
+">
+    <h3 style="color:#4B0082; margin-bottom:10px;">🌟 Susține proiectul</h3>
+
+    <p style="font-size:16px; line-height:1.4;">
+        Dacă îți place aplicația, poți face o donație rapidă în <b>SOL</b>.
+    </p>
+
+    <div style="font-family: monospace; font-size: 14px;
+        background:#f5f5f5; padding:12px; border-radius:8px;
+        word-break: break-all; margin-bottom:10px;">
+        {sol_address}
+    </div>
+
+    <a href="https://phantom.app/ul/browse/pay?recipient={sol_address}&amount=0.1&reference=donate_demo"
+       target="_blank"
+       style="display:inline-block; background:#4B0082; color:white;
+       padding:10px 18px; border-radius:8px; text-decoration:none;">
+        💜 Donează cu Phantom
+    </a>
+
+    <p style="font-size:12px; margin-top:10px; opacity:0.7;">
+        * Poți schimba suma înainte de a trimite.
+    </p>
+</div>
+"""
+
+ELEVENLABS_API_KEY = os.environ.get("ELEVENLABS_API_KEY")
+# Optionally set VOICE_NAME to a friendly name or to a voice id. If you don't
+# set it, we'll try to pick a voice named 'Bella' or fall back to the first
+# available voice returned by the API.
+VOICE_NAME = os.environ.get("ELEVENLABS_VOICE") or "Bella"
+
+
+def text_to_speech(text: str):
+    """
+    Sends text to ElevenLabs API and returns audio bytes
+    """
+    if not text:
+        return None
+
+    # If ElevenLabs API key is not configured, skip remote TTS and return None.
+    if not ELEVENLABS_API_KEY:
+        print("ELEVENLABS_API_KEY not set — skipping TTS generation")
+        return None
+
+    # Helper: try to list voices and resolve a voice id for VOICE_NAME
+    def _resolve_voice_id():
+        try:
+            r = requests.get("https://api.elevenlabs.io/v1/voices", headers={"xi-api-key": ELEVENLABS_API_KEY}, timeout=10)
+            if r.status_code != 200:
+                print(f"Failed to list ElevenLabs voices: {r.status_code} {r.text}")
+                return None
+            data = r.json()
+            voices = data.get("voices") if isinstance(data, dict) else None
+            if not voices:
+                # Some installations return a list directly
+                if isinstance(data, list):
+                    voices = data
+            if voices:
+                # Try to find a voice by name (case-insensitive)
+                for v in voices:
+                    name = v.get("name") or v.get("voice_name") or v.get("label")
+                    vid = v.get("voice_id") or v.get("id") or v.get("voice")
+                    if name and vid and name.lower() == VOICE_NAME.lower():
+                        return vid
+                # fallback: return first voice id
+                first = voices[0]
+                return first.get("voice_id") or first.get("id") or first.get("voice")
+        except Exception as e:
+            print(f"Could not resolve ElevenLabs voices: {e}")
+        return None
+
+    voice_id = _resolve_voice_id() or VOICE_NAME
+
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
+    headers = {"xi-api-key": ELEVENLABS_API_KEY}
+    payload = {
+        "text": text,
+        # voice_settings is optional; keep some default options
+        "voice_settings": {"stability": 0.5, "similarity_boost": 0.7}
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=payload, timeout=20)
+        if response.status_code == 200:
+            return ("audio.mp3", response.content)
+        else:
+            # Log detailed response to help debugging
+            print(f"ElevenLabs TTS failed: {response.status_code} {response.text}")
+    except Exception as e:
+        print(f"TTS request failed: {e}")
+    return None
+
+# --- Prepare welcome audio at startup (autoplay) ---
+WELCOME_TEXT = "Welcome to our site. Please select a monument to find out more about it."
+initial_audio = None
+
+try:
+    tts_res = text_to_speech(WELCOME_TEXT)  # your TTS function
+    if tts_res:
+        _, audio_bytes = tts_res
+        os.makedirs("assets", exist_ok=True)
+        welcome_path = os.path.join("assets", "welcome.mp3")
+        with open(welcome_path, "wb") as wf:
+            wf.write(audio_bytes)
+        initial_audio = welcome_path
+except Exception as e:
+    print(f"Warning: welcome TTS generation failed: {e}")
+
 
 def preview_monument(monument_name):
     """Fast preview: return caption and image quickly without generating music."""
@@ -738,12 +869,17 @@ button { border-radius: 10px; background: #c3a66d; color: #fff; border: none; pa
 #prev_btn, #next_btn { width: 40px; font-size:18px; padding:4px 6px; }
 """
 with gr.Blocks(css=gr_css) as demo:
-    gr.Markdown("<h1>🎵 Music AI — Harta Interactivă</h1>")
+    gr.Markdown("<h1 style='text-align:center;'>🎵 Music AI — Harta Interactivă</h1>")
+    if initial_audio:
+        # Gradio will serve the file and handle autoplay
+        gr.Audio(initial_audio, autoplay=True, visible=False)
+    
+    gr.Markdown("<h2 style='text-align:center;'>Welcome to our site! Please select a monument to find out more.</h2>")
 
     # --- Map Interaction ---
     with gr.Column(scale=1):
         # gr.Markdown("### 🖱️ Click pe harta statică pentru coordonate")
-        gr.Markdown("Apasă pe harta de mai jos pentru a selecta un monument și a genera muzică inspirată de acesta.")
+        gr.Markdown("<h3 style='text-align:center;'>Apasă pe harta de mai jos pentru a selecta un monument și a genera muzică inspirată de acesta.</h3>")
         toggle_city_btn = gr.Button("Toggle Timișoara / România")
         click_img = gr.Image(
             value="assets/harta_romaniei.jpg",
@@ -809,7 +945,13 @@ with gr.Blocks(css=gr_css) as demo:
 
     trivia_btn = gr.Button("🧠 Generează Trivia")
     trivia_out = gr.Textbox(label="Trivia", interactive=False)
+    
+    # Hidden audio output: no visible player in the UI, will be played via hidden JS
+    audio_out = gr.Audio(label="Welcome", type="filepath", value=initial_audio, autoplay=True, visible=False)
 
+    with gr.Accordion("💜 Donații", open=False):
+        gr.HTML(donate_html)
+        
     # --- CSS for layout ---
     gr.HTML("""
     <style>
@@ -997,6 +1139,28 @@ with gr.Blocks(css=gr_css) as demo:
     </script>
     """
     gr.HTML(js_bridge)
+
+web_audio_path = initial_audio.replace('\\', '/') if initial_audio else ''
+play_script = ("""
+<script>
+(function(){
+    const audioPath = "{WEB}";
+    if(!audioPath) return;
+    // Gradio serves local files under the /file= route; use that to fetch the asset
+    const url = '/file=' + audioPath;
+    const a = new Audio(url);
+    a.autoplay = true;
+    a.playsInline = true;
+    a.muted = false;
+    a.play().catch(function(e){
+        // Autoplay blocked — silently fail. Nothing visible is shown per user preference.
+        console.debug('Autoplay blocked or failed', e);
+    });
+})();
+</script>
+""").replace("{WEB}", web_audio_path)
+gr.HTML(play_script, visible=False)
+
 
 # Register a Suno callback on Gradio's FastAPI server so Suno can POST completion data
 try:
