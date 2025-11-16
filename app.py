@@ -933,6 +933,7 @@ with gr.Blocks(css=gr_css) as demo:
         music_out = gr.Audio(label="Muzică generată", autoplay=True, elem_id="generated_audio")
         with gr.Column():
             loop_checkbox = gr.Checkbox(label="Loop muzică", value=True, elem_id="loop_checkbox")
+            open_backend_btn = gr.Button("Open backend", elem_id="open_backend_btn")
             use_local_checkbox = gr.Checkbox(label="Use local model (MusicGen)", value=False, elem_id="use_local_checkbox")
 
     caption_out = gr.Textbox(
@@ -951,7 +952,7 @@ with gr.Blocks(css=gr_css) as demo:
 
     with gr.Accordion("💜 Donații", open=False):
         gr.HTML(donate_html)
-        
+    
     # --- CSS for layout ---
     gr.HTML("""
     <style>
@@ -1063,6 +1064,14 @@ with gr.Blocks(css=gr_css) as demo:
  )
 
     toggle_city_btn.click(fn=toggle_city, inputs=[view_state], outputs=[click_img, monument_dropdown, bridge_out, view_state])
+
+    # Open local backend in a new browser tab (client-side)
+    open_backend_btn.click(
+        None,
+        inputs=[],
+        outputs=[],
+        _js="() => { window.open('http://localhost:5022', '_blank'); }"
+    )
 
     # client side bridge: forward Gradio dropdown changes (nearby monuments) to the iframe
     js_bridge = """
