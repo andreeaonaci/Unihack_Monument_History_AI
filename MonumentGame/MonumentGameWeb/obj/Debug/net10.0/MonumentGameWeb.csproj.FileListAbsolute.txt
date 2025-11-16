@@ -2592,12 +2592,6 @@ D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Runtime.Intrinsics.kmq2apj5l0.wasm.gz
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.ComponentModel.DataAnnotations.b05dlz1h33.wasm.gz
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Security.Principal.60u8ec2sxl.wasm.gz
-D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.73yp9hkto3.pdb
-D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.e4vx5n2z4e.wasm
-D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.uy4eg1ox7k.js
-D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.uy4eg1ox7k.js.gz
-D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.73yp9hkto3.pdb.gz
-D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.e4vx5n2z4e.wasm.gz
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\publish\web.config
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\publish\wwwroot\web.config
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\publish\MonumentGameWeb.runtimeconfig.json
@@ -3251,9 +3245,6 @@ D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\pevitvqsft-{0}-tjcz0u77k5-tjcz0u77k5.gz
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\9lu9niqggi-{0}-tptq2av103-tptq2av103.gz
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\tdzwlf09gg-{0}-lfu7j35m59-lfu7j35m59.gz
-D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\kqyvs5tt9j-{0}-e4vx5n2z4e-e4vx5n2z4e.gz
-D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\hqduw9vjln-{0}-73yp9hkto3-73yp9hkto3.gz
-D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\ebwxj4hbv9-{0}-uy4eg1ox7k-uy4eg1ox7k.gz
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\staticwebassets.build.json
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\staticwebassets.build.json.cache
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\staticwebassets.development.json
@@ -3264,3 +3255,12 @@ D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\refint\MonumentGameWeb.dll
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\MonumentGameWeb.pdb
 D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\ref\MonumentGameWeb.dll
+D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.qp6badq71u.wasm
+D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.yeel9aga8z.pdb
+D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.4furmveigm.js
+D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.4furmveigm.js.gz
+D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.yeel9aga8z.pdb.gz
+D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.qp6badq71u.wasm.gz
+D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\kqyvs5tt9j-{0}-qp6badq71u-qp6badq71u.gz
+D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\hqduw9vjln-{0}-yeel9aga8z-yeel9aga8z.gz
+D:\unihack\UniHack_music_generator_from_Images\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\ebwxj4hbv9-{0}-4furmveigm-4furmveigm.gz

@@ -458,7 +458,7 @@ def ensure_dotnet_running(project_path, port=5022, profile="http"):
     for _ in range(30):
         try:
             requests.get(f"http://localhost:{port}", timeout=1)
-            print("⭐ .NET backend is UP!")
+            print(f"⭐ .NET backend is UP! at http://localhost:{port}")
             return
         except:
             time.sleep(1)
