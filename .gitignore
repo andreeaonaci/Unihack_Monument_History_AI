@@ -1,9 +1,0 @@
-MonumentGame\bin\*
-MonumentGame\obj\*
-MonumentGame\MonumentGameAPI\bin\*
-MonumentGame\MonumentGameAPI\obj\*
-MonumentGame\MonumentGameWeb\obj\*
-MonumentGame\MonumentGameWeb\bin\*
-MonumentGame\MonumentGameWeb\Properties\*
-
-.vs\*
