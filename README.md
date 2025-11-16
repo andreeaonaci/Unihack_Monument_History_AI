@@ -59,7 +59,7 @@ Supports **map-based interaction**, **Solana donations**, and integrates multipl
 
 ### Prerequisites
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
 - Python 3.10+ with required packages (`gradio`, `requests`, `openai`, `huggingface_hub`, etc.)
 - Solana wallet (Phantom or other)
 - ElevenLabs API key
