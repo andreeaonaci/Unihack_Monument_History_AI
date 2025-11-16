@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MonumentGameWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa8aea30b29ebbed54492926dce3328ca3d6a351")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c723c21be92f2e64e31ac7e6147e4bddd149308")]
 [assembly: System.Reflection.AssemblyProductAttribute("MonumentGameWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MonumentGameWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
