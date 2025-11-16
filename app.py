@@ -932,9 +932,9 @@ with gr.Blocks(css=gr_css) as demo:
     with gr.Row():
         music_out = gr.Audio(label="Muzică generată", autoplay=True, elem_id="generated_audio")
         with gr.Column():
-            loop_checkbox = gr.Checkbox(label="Loop muzică", value=True, elem_id="loop_checkbox")
-            open_backend_btn = gr.Button("Open backend", elem_id="open_backend_btn")
-            use_local_checkbox = gr.Checkbox(label="Use local model (MusicGen)", value=False, elem_id="use_local_checkbox")
+            loop_checkbox = gr.Checkbox(label="Loop muzică", value=True, elem_id="loop_checkbox", visible=False)
+            open_backend_btn = gr.Button("While you wait you can play some games here", elem_id="open_backend_btn")
+            use_local_checkbox = gr.Checkbox(label="Use local model (MusicGen)", value=False, elem_id="use_local_checkbox", visible=False)
 
     caption_out = gr.Textbox(
         label="Descriere generată",
@@ -1070,7 +1070,7 @@ with gr.Blocks(css=gr_css) as demo:
         None,
         inputs=[],
         outputs=[],
-        _js="() => { window.open('http://localhost:5022', '_blank'); }"
+        js="() => { window.open('http://localhost:5022/trivia', '_blank'); }"
     )
 
     # client side bridge: forward Gradio dropdown changes (nearby monuments) to the iframe
