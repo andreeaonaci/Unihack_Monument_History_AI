@@ -5,3 +5,8 @@ soundfile
 wikipedia
 googl
 requests
+google
+openai
+google-auth
+google-genai
+PyGithub

@@ -8,9 +8,59 @@ from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 import math
 from modules import settings as app_settings
+from google.oauth2 import service_account
+from google.auth.transport.requests import Request as GoogleRequest
+from google import genai
+from openai import OpenAI
+from github import Github
+import subprocess
+import socket
 
+# GEMINI can be called via a Google service account (recommended) or via an API key.
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+GOOGLE_SA_PATH = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
 
 def _call_gemini_rest(prompt: str, model: str = "models/gemini-1.0") -> str:
+    """Call Gemini via REST or Google SA."""
+    url_template = "https://generativelanguage.googleapis.com/v1beta2/{model}:generateText"
+    candidate_models = [model] + [m for m in ("models/gemini-1.0","models/text-bison-001","models/chat-bison-001") if m != model]
+
+    last_error = None
+
+    def _parse_response(resp):
+        data = resp.json()
+        if "candidates" in data and data["candidates"]:
+            return data["candidates"][0].get("content", "").strip()
+        return json.dumps(data)
+
+    for m in candidate_models:
+        url = url_template.format(model=m)
+        headers = {"Content-Type": "application/json"}
+        params = {}
+
+        try:
+            if GOOGLE_SA_PATH and os.path.exists(GOOGLE_SA_PATH):
+                creds = service_account.Credentials.from_service_account_file(
+                    GOOGLE_SA_PATH, scopes=["https://www.googleapis.com/auth/cloud-platform"]
+                )
+                creds.refresh(GoogleRequest())
+                headers["Authorization"] = f"Bearer {creds.token}"
+            elif GEMINI_API_KEY:
+                params["key"] = GEMINI_API_KEY
+            else:
+                raise RuntimeError("No Google credentials found.")
+
+            payload = {"prompt": {"text": prompt}, "temperature":0.7, "maxOutputTokens":150}
+            resp = requests.post(url, headers=headers, params=params, json=payload, timeout=30)
+            if resp.status_code == 404:
+                last_error = resp
+                continue
+            resp.raise_for_status()
+            return _parse_response(resp)
+        except Exception as e:
+            last_error = e
+            continue
+
     raise RuntimeError(f"Gemini REST call failed: {last_error}")
 
 # --- Auth0 setup ---
@@ -31,6 +81,7 @@ def get_auth0_token():
     res = requests.post(url, json=payload, timeout=10)
     res.raise_for_status()
     return res.json()["access_token"]
+
 
 def generate_trivia(monument_name, description):
     """
@@ -415,7 +466,7 @@ def ensure_dotnet_running(project_path, port=5022, profile="http"):
     raise RuntimeError("❌ .NET failed to start after 30 seconds.")
 
 ensure_dotnet_running(
-    project_path="MonumentGame/MonumentGameWeb"
+    project_path="./MonumentGame/MonumentGameWeb"
 )
 
 def preview_monument(monument_name):
