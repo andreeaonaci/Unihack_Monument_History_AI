@@ -58,5 +58,5 @@ Supports **map-based interaction**, **Solana donations**, and integrates multipl
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/monument-music-ai.git
+git clone https://github.com/andreeaonaci/Unihack_Monument_History_AI.git
 cd monument-music-ai
