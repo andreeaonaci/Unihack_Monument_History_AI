@@ -31,8 +31,6 @@ C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_fr
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\Microsoft.VisualBasic.r1r1o64guk.wasm
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\Microsoft.Win32.Primitives.5nko60lje3.wasm
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\Microsoft.Win32.Registry.lmhf2szmg9.wasm
-C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.hylild7lbu.pdb
-C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.spvfdbdvsk.wasm
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.802vhulao5.wasm
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.AppContext.c2z2iszv5a.wasm
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Buffers.jv7wyzqgeh.wasm
@@ -202,7 +200,6 @@ C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_fr
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.js.map
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.native.2qba9g5fwn.wasm
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.native.xanz2e7ksm.js
-C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.pcc25sp9g3.js
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.runtime.js.map
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.runtime.o0qy896u8v.js
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\icudt_CJK.tjcz0u77k5.dat
@@ -298,7 +295,6 @@ C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_fr
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\Microsoft.CSharp.j06echzfpz.wasm.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\netstandard.qwxk4mrnbx.wasm.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Reflection.Metadata.4temtjmiid.wasm.gz
-C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.pcc25sp9g3.js.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\Microsoft.Extensions.Diagnostics.tgzcelqpkb.wasm.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Net.Primitives.06opecf70b.wasm.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Text.Encoding.Extensions.mr1rkcnv13.wasm.gz
@@ -319,7 +315,6 @@ C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_fr
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.native.2qba9g5fwn.wasm.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.IO.Compression.FileSystem.8e8pwcj0r8.wasm.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Web.gl9seasc22.wasm.gz
-C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.hylild7lbu.pdb.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Runtime.csube7l7j7.wasm.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Net.Security.7zwmva046j.wasm.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Reflection.Emit.Lightweight.dg35e9lw3s.wasm.gz
@@ -339,7 +334,6 @@ C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_fr
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\Microsoft.Extensions.FileSystemGlobbing.4cqycihgg0.wasm.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Web.HttpUtility.cxyvb282ci.wasm.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Private.Uri.z6jswaywn8.wasm.gz
-C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.spvfdbdvsk.wasm.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Security.Cryptography.k3w9v7ue50.wasm.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Diagnostics.Contracts.dck23rphvl.wasm.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\System.Threading.Tasks.Parallel.uopu4j1ll0.wasm.gz
@@ -1074,9 +1068,6 @@ C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\pevitvqsft-{0}-tjcz0u77k5-tjcz0u77k5.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\9lu9niqggi-{0}-tptq2av103-tptq2av103.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\tdzwlf09gg-{0}-lfu7j35m59-lfu7j35m59.gz
-C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\kqyvs5tt9j-{0}-spvfdbdvsk-spvfdbdvsk.gz
-C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\hqduw9vjln-{0}-hylild7lbu-hylild7lbu.gz
-C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\ebwxj4hbv9-{0}-pcc25sp9g3-pcc25sp9g3.gz
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\staticwebassets.build.json
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\staticwebassets.build.json.cache
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\staticwebassets.development.json
@@ -1087,3 +1078,12 @@ C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\MonumentGam
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\refint\MonumentGameWeb.dll
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\MonumentGameWeb.pdb
 C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\ref\MonumentGameWeb.dll
+C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.dz5m4mt82h.pdb
+C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.tkos6n01no.wasm
+C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.knmi4piu42.js
+C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\dotnet.knmi4piu42.js.gz
+C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.dz5m4mt82h.pdb.gz
+C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\bin\Debug\net10.0\wwwroot\_framework\MonumentGameWeb.tkos6n01no.wasm.gz
+C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\kqyvs5tt9j-{0}-tkos6n01no-tkos6n01no.gz
+C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\hqduw9vjln-{0}-dz5m4mt82h-dz5m4mt82h.gz
+C:\Users\Deea\UniHack\MonumentGame\MonumentGameWeb\obj\Debug\net10.0\compressed\ebwxj4hbv9-{0}-knmi4piu42-knmi4piu42.gz
