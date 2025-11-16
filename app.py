@@ -10,6 +10,87 @@ import math
 from modules import settings as app_settings
 
 
+def _call_gemini_rest(prompt: str, model: str = "models/gemini-1.0") -> str:
+    raise RuntimeError(f"Gemini REST call failed: {last_error}")
+
+# --- Auth0 setup ---
+AUTH0_DOMAIN = os.environ.get("AUTH0_DOMAIN")
+AUTH0_CLIENT_ID = os.environ.get("AUTH0_CLIENT_ID")
+AUTH0_CLIENT_SECRET = os.environ.get("AUTH0_CLIENT_SECRET")
+AUTH0_AUDIENCE = os.environ.get("AUTH0_AUDIENCE") or f"https://{AUTH0_DOMAIN}/api/v2/"
+
+def get_auth0_token():
+    """Obține token Auth0 pentru autentificarea request-ului."""
+    url = f"https://{AUTH0_DOMAIN}/oauth/token"
+    payload = {
+        "client_id": AUTH0_CLIENT_ID,
+        "client_secret": AUTH0_CLIENT_SECRET,
+        "audience": AUTH0_AUDIENCE,
+        "grant_type": "client_credentials"
+    }
+    res = requests.post(url, json=payload, timeout=10)
+    res.raise_for_status()
+    return res.json()["access_token"]
+
+def generate_trivia(monument_name, description):
+    """
+    Folosește Auth0 pentru autentificare și apelează Gemini pentru generare trivia.
+    """
+    prompt = (
+        f"Formulează o întrebare trivia distractivă despre monumentul {monument_name}: "
+        f"{description} care să înceapă cu „Știați că...?” și să fie sub 150 de caractere. Nu printa si numărul de caractere în răspuns, doar întrebarea."
+    )
+
+    try:
+        token = get_auth0_token()
+        print("Successfully authenticated!")
+    except Exception as e:
+        raise RuntimeError(f"Auth0 authentication failed: {e}")
+
+    try:
+        client = genai.Client()
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt
+        )
+        return response.text.strip()
+    except Exception as gemini_error:
+        print(f"Gemini API failed: {gemini_error}.")
+
+    # try:
+    #     # Ensure the .NET backend is started (adjust path/profile as needed)
+    #     ensure_dotnet_running(project_path="C:/Users/Deea/UniHack/MonumentGame", port=5022, profile="http")
+
+    #     # Simply "call" the page — no payload needed
+    #     url = "http://localhost:5022/api/trivia/generate"
+    #     response = requests.get(url, timeout=5)
+
+    #     # Debug output
+    #     print(f"[fallback] GET {url} -> status={response.status_code}")
+
+    #     # Return a simple message since we don't care about JSON
+    #     if response.status_code == 200:
+    #         return "Local backend is running!"
+    #     else:
+    #         raise RuntimeError(f"Local backend returned status {response.status_code}")
+
+    # except Exception as local_error:
+    #     raise RuntimeError(f"Both Gemini and local fallback failed: {local_error}")
+
+    
+def generate_trivia_with_fallback(monument_name, description):
+    """UI-friendly wrapper: call generate_trivia and fall back to a harmless mocked
+    question if generation fails. This keeps the frontend responsive while keeping
+    the core generate_trivia function strict and error-reporting.
+    """
+    try:
+        return generate_trivia(monument_name, description)
+    except Exception as e:
+        print(f"generate_trivia failed: {e}")
+        # Return a helpful mocked/training-style question so UI still shows something
+        return f"(Fallback trivia) Întrebare despre {monument_name}: Care este un fapt interesant legat de acest monument?"
+
+
 def build_markers_json():
     monuments = load_monuments()
     markers = []
@@ -146,7 +227,7 @@ window.addEventListener('message', (e) => {
 # === Date harta și coordonate ===
 lat_max, lat_min = 48.27, 43.63
 lon_min, lon_max = 20.26, 29.65
-search_radius = 1
+search_radius = 0.5
 
 # Timișoara bounding box (used when the app is in Timisoara view)
 # bottom-left = (45.74033907806305, 21.19006057720918)
@@ -225,7 +306,6 @@ def draw_markers_on_image(evt: gr.SelectData, img_input):
     lon = lon_min_loc + x_px * (lon_max_loc - lon_min_loc) / w
 
     nearby = []
-    print(dataset_path, "loading monuments for click processing")
     for m in load_monuments(dataset_path):
         if m.get("lat") is None or m.get("lon") is None:
             continue
@@ -278,12 +358,12 @@ def process_monument_ui(monument_name):
     except Exception:
         is_tm = False
 
-    dataset_path = "datasets/dataset_timisoara.xml" if is_tm else None
+    dataset_path = "datasets/dataset_timisoara.xml" if is_tm else "datasets/dataset.xml"
 
-    # look up the monument in the appropriate dataset (substring, case-insensitive)
+    # look up the monument in the appropriate dataset (substring, case-sensitive)
     monument = None
     for m in load_monuments(dataset_path):
-        if m.get("nume") and monument_name.lower() in m.get("nume").lower():
+        if m.get("nume") and monument_name in m.get("nume"):
             monument = m
             break
 
@@ -299,8 +379,44 @@ def process_monument_ui(monument_name):
     # generate up to 15s, prefer loopable output
     # kept for backward compatibility: generate music and return caption,image,music
     music_path = generate_music(caption, output_path="assets/generated_music.wav", duration_sec=15, loop=True)
-    return caption, music_path, image
+    trivia = generate_trivia_with_fallback(monument.get("nume", monument_name), caption)
+    return caption, music_path, image, trivia
 
+
+def ensure_dotnet_running(project_path, port=5022, profile="http"):
+    """Start the .NET server using the correct launch profile."""
+    
+    # 1. Check if already running
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        if sock.connect_ex(("localhost", port)) == 0:
+            print(f".NET backend already running on port {port}.")
+            return
+
+    print(f"🚀 Starting .NET backend using launch profile '{profile}'...")
+
+    # 2. Start dotnet run using REAL profile
+    subprocess.Popen(
+        ["dotnet", "run", "--launch-profile", profile],
+        cwd=project_path,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        shell=True
+    )
+
+    # 3. Wait for the server to go online
+    for _ in range(30):
+        try:
+            requests.get(f"http://localhost:{port}", timeout=1)
+            print("⭐ .NET backend is UP!")
+            return
+        except:
+            time.sleep(1)
+
+    raise RuntimeError("❌ .NET failed to start after 30 seconds.")
+
+ensure_dotnet_running(
+    project_path="MonumentGame/MonumentGameWeb"
+)
 
 def preview_monument(monument_name):
     """Fast preview: return caption and image quickly without generating music."""
@@ -532,6 +648,34 @@ def toggle_city(state):
 
     return img_path, dd_update, bridge_js, new_state
 
+# Helper to normalize values coming from Gradio dropdowns.
+def resolve_dropdown_value(name):
+    """Normalizează valoarea dropdown: dacă e list returnează primul element, altfel returnează stringul curat."""
+    if isinstance(name, list):
+        return name[0] if len(name) > 0 else ""
+    return name or ""
+
+def trivia_click(name):
+    """Wrapper pentru butonul Trivia: normalizează inputul și apelează generate_trivia_with_fallback."""
+    sel = resolve_dropdown_value(name)
+    if not sel:
+        return "Selectează un monument"
+    try:
+        desc = match_monument_by_name(sel).get("descriere", "")
+    except Exception:
+        desc = ""
+    return generate_trivia_with_fallback(sel, desc)
+
+def generate_btn_click(name):
+    """Wrapper pentru butonul de generare muzică: normalizează inputul și apelează process_monument_ui.
+    Returnează shape compatibilă cu outputs: (caption, music_path, image, trivia)
+    """
+    sel = resolve_dropdown_value(name)
+    if not sel:
+        # caption_out, music_out, image_card, trivia_out
+        return "", None, None, "(Niciun monument selectat)"
+    return process_monument_ui(sel)
+
 # CSS for layout and the "Alte imagini" gallery box
 gr_css = gr_css = """
 * { font-family: 'Inter', sans-serif; transition: all .25s ease; }
@@ -594,7 +738,6 @@ with gr.Blocks(css=gr_css) as demo:
         height="100px"
     )
 
-    
     gallery_state = gr.State(value=[])
     gallery_index = gr.State(value=0)
 
@@ -612,6 +755,9 @@ with gr.Blocks(css=gr_css) as demo:
         max_lines=12,
         autoscroll=True
     )
+
+    trivia_btn = gr.Button("🧠 Generează Trivia")
+    trivia_out = gr.Textbox(label="Trivia", interactive=False)
 
     # --- CSS for layout ---
     gr.HTML("""
@@ -708,8 +854,20 @@ with gr.Blocks(css=gr_css) as demo:
         queue=True
     )
 
-    prev_btn.click(fn=prev_image, inputs=[gallery_state, gallery_index], outputs=[image_card, gallery_index])
-    next_btn.click(fn=next_image, inputs=[gallery_state, gallery_index], outputs=[image_card, gallery_index])
+    trivia_btn.click(
+        fn=trivia_click,
+        inputs=[monument_dropdown],
+        outputs=[trivia_out]
+    )
+    
+    prev_btn.click(fn=prev_image, 
+                   inputs=[gallery_state, gallery_index], 
+                   outputs=[image_card, gallery_index]
+    )
+    next_btn.click(fn=next_image, 
+                   inputs=[gallery_state, gallery_index], 
+                   outputs=[image_card, gallery_index]
+ )
 
     toggle_city_btn.click(fn=toggle_city, inputs=[view_state], outputs=[click_img, monument_dropdown, bridge_out, view_state])
 
